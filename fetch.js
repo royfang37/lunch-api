@@ -5,8 +5,8 @@ const SCHOOL_ID = "64736873";
 async function main() {
   // 台灣日期
   const today = new Intl.DateTimeFormat("sv-SE", {
-    timeZone: "Asia/Taipei",
-  }).format(new Date());
+  timeZone: "Asia/Taipei",
+}).format(new Date());
 
   console.log("日期:", today);
 

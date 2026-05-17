@@ -1,0 +1,38 @@
+name: Update Lunch JSON
+
+on:
+  schedule:
+    # 台灣時間每天早上 6:00
+    - cron: '0 22 * * *'
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-lunch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Script
+        run: node fetch.js
+
+      - name: Commit JSON
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add lunch.json
+
+          git diff --cached --quiet || git commit -m "auto update lunch"
+
+          git push
