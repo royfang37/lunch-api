@@ -8,5 +8,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royfang37/lunch-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/royfang37/lunch-api/issues"
+  },
+  "homepage": "https://github.com/royfang37/lunch-api#readme"
 }
