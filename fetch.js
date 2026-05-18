@@ -24,9 +24,25 @@ async function main() {
   const mealJson = await mealRes.json();
 
   if (!mealJson.data || mealJson.data.length === 0) {
-    console.log("今天沒有午餐資料");
-    return;
-  }
+
+  const result = {
+    school: "高雄市楠梓區加昌國小",
+    date: today,
+    holiday: true,
+    message: "今天沒有供餐"
+  };
+
+  fs.writeFileSync(
+    "lunch.json",
+    JSON.stringify(result, null, 2),
+    "utf8"
+  );
+
+  console.log("今天沒有供餐");
+  console.log("lunch.json 已更新");
+
+  return;
+}
 
   const meal = mealJson.data[0];
 
