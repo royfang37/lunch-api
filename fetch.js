@@ -23,26 +23,26 @@ async function main() {
   const mealRes = await fetch(mealUrl);
   const mealJson = await mealRes.json();
 
-  if (!mealJson.data || mealJson.data.length === 0) {
+  if (!mealJson.data || mealJson.data.length === 0 || mealJson.data[0].MenuDate !== today) {
 
-  const result = {
-    school: "高雄市楠梓區加昌國小",
-    date: today,
-    holiday: true,
-    message: "今天沒有供餐"
-  };
+    const result = {
+      school: "高雄市楠梓區加昌國小",
+      date: today,      // 確保顯示今天的日期
+      holiday: true,    // 標記為假日
+      message: "今天沒有供餐"
+    };
 
-  fs.writeFileSync(
-    "lunch.json",
-    JSON.stringify(result, null, 2),
-    "utf8"
-  );
+    fs.writeFileSync(
+      "lunch.json",
+      JSON.stringify(result, null, 2),
+      "utf8"
+    );
 
-  console.log("今天沒有供餐");
-  console.log("lunch.json 已更新");
+    console.log(`今天 (${today}) 沒有供餐（API 回傳了舊資料或無資料）`);
+    console.log("lunch.json 已更新為假日模式");
 
-  return;
-}
+    return;
+  }
 
   const meal = mealJson.data[0];
 
